@@ -2,13 +2,13 @@ const Dev = require('../model/dev');
 
 module.exports = {
     async store(request, response) {
-        const {user} = req.headers;
-        const { devId } = req.params; 
+        const {user} = request.headers;
+        const { devId } = request.params; 
 
         const loggedDev = await Dev.findById(user);
-        const targedDev = await Dev.findById(devId);
+        const targetDev = await Dev.findById(devId);
 
-        if (!targedDev) {
+        if (!targetDev) {
             return res.status(400).json({ error: 'Dev not exists'});
         }
 
@@ -16,6 +16,6 @@ module.exports = {
 
         await loggedDev.save();
 
-        return res.json(loggedDev);
+        return response.json(loggedDev);
     }
 }
