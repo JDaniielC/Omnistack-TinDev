@@ -16,7 +16,7 @@ io.on('connection', socket => {
     })
 });
 
-mongoose.connect('mongodb+srv://omnistack:omnistack@cluster0.o6fxw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+mongoose.connect('', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
