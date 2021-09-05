@@ -3,7 +3,6 @@ const devController = require('./controllers/devController');
 const likeController = require('./controllers/likeController');
 const dislikeController = require('./controllers/dislikeController');
 
-
 const routes = express.Router();
 
 routes.get('/devs', devController.index);
