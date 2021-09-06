@@ -6,20 +6,30 @@ const routes = require('./routes');
 
 const app = express();
 const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, {
+    cors: {
+      origin: "http://localhost:3000",
+      methods: ["GET", "POST"]
+    }
+  });
+
+const connectedUsers = {};
 
 io.on('connection', socket => {
-    console.log('Nova conexão', socket.id);
-
-    socket.on('hello', message => {
-        console.log(message)
-    })
+    const {user} = socket.handshake.query;
+    connectedUsers[user] = socket.id;
 });
 
 mongoose.connect('mongodb+srv://omnistack:omnistack@cluster0.o6fxw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
+
+app.use((req, res, next) => {
+    req.io = io;
+    req.connectedUsers = connectedUsers;
+    return next();
+})
 
 app.use(cors());
 app.use(express.json());
