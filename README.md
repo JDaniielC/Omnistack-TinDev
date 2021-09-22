@@ -33,13 +33,13 @@ Configure o MongoDB e atualize a string de conexão com seu `User:Senha` no arqu
 **Backend**
 ```bash
 cd backend
-yarn install
+yarn
 yarn dev
 ```
 
 **Frontend**:
 ```bash
 cd web
-yarn install
+yarn
 yarn start
 ```
